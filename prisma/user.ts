@@ -2,7 +2,11 @@ import prisma from "./prisma";
 
 // READ
 export const getAllUsers = async () => {
-  const users = await prisma.user.findMany({});
+  const users = await prisma.user.findMany({
+    include: {
+      Post: true,
+    },
+  });
   return users;
 };
 
