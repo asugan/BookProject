@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter();
 
   const mainDivStyle = {
     padding: "1em",
@@ -20,30 +23,42 @@ export default function Home() {
 
     const credentials: any = { username, password };
 
-    const user = await fetch("/api/auth/login", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
-    });
+    try {
+      let user = await fetch("/api/auth/login", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      });
 
+      if (user.status === 200) {
+        router.push("/dashboard/user");
+      } else {
+        console.log("Some error occured");
+      }
+
+      const hamham = await user.json();
+
+      console.log(hamham);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleGetUser = async () => {
+    const user = await fetch("/api/myuser");
     const hamham = await user.json();
 
     console.log(hamham);
   };
 
-  const handleGetUser = async () => {
-    const user = await fetch("/api/user");
-
-    console.log(user);
-  };
-
   const handleLogOut = async () => {
     const user = await fetch("/api/auth/logout");
+    const hamham = await user.json();
 
-    console.log(user);
+    console.log(hamham);
   };
 
   return (
