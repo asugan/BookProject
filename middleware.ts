@@ -6,12 +6,11 @@ const secret: any = process.env.SECRET;
 export default async function middleware(req: any) {
   const { cookies } = req;
   const { origin } = req.nextUrl;
+  const { pathname } = req.nextUrl;
 
-  const jwt = cookies.OursiteJWT;
+  const jwt = cookies.get("OursiteJWT");
 
-  const url = req.url;
-
-  if (url.includes("/login")) {
+  if (pathname === "/login") {
     if (jwt) {
       try {
         console.log("trying to verify jwt");
@@ -21,14 +20,14 @@ export default async function middleware(req: any) {
         );
         console.log("verifying", verifying);
 
-        return NextResponse.redirect("/");
+        return NextResponse.redirect(`${origin}`);
       } catch (e) {
         return NextResponse.next();
       }
     }
   }
 
-  if (url.includes("/dashboard")) {
+  if (pathname === "/dashboard/user") {
     if (jwt === undefined) {
       return NextResponse.redirect(`${origin}/login`);
     }
