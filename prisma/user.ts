@@ -10,9 +10,14 @@ export const getAllUsers = async () => {
   return users;
 };
 
-export const getUser = async (id: string) => {
-  const user = await prisma.user.findUnique({
-    where: { id },
+export const getUser = async (username: string, password: string) => {
+  const user = await prisma.user.findFirst({
+    where: {
+      AND: [
+        { username: { equals: username } },
+        { password: { equals: password } },
+      ],
+    },
   });
   return user;
 };
