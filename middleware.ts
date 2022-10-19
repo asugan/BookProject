@@ -3,7 +3,7 @@ import * as jose from "jose";
 
 const secret: any = process.env.SECRET;
 
-export default async function middleware(req: any) {
+export default async function middleware(req: any, res: any) {
   const { cookies } = req;
   const { origin } = req.nextUrl;
   const { pathname } = req.nextUrl;
@@ -39,7 +39,13 @@ export default async function middleware(req: any) {
       );
       console.log("verifying", verifying);
 
-      return NextResponse.next();
+      if (verifying.payload.role === "Admin") {
+        return NextResponse.next();
+      } else {
+        return NextResponse.rewrite(`${origin}/401`, {
+          status: 401,
+        });
+      }
     } catch (e) {
       return NextResponse.redirect(`${origin}/login`);
     }

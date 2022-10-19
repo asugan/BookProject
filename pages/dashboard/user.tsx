@@ -1,9 +1,21 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 
-function user() {
+function User() {
+  const [logout, setLogout] = useState(false);
+
+  const router = useRouter();
+
   const handleLogOut = async () => {
     const user = await fetch("/api/auth/logout");
     const hamham = await user.json();
+    setLogout(true);
+
+    if (user.status === 200) {
+      router.push("/login");
+    } else {
+      console.log("errorlar oldu");
+    }
 
     console.log(hamham);
   };
@@ -26,4 +38,4 @@ function user() {
   );
 }
 
-export default user;
+export default User;

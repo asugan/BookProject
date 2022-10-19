@@ -27,6 +27,7 @@ export default async function hamham(
         username: username,
         mail: mail,
         id: id,
+        role: users.role,
       },
       secret
     );
