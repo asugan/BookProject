@@ -6,15 +6,15 @@ export default async function userinfo(req: any, res: any) {
 
   const jwt = cookies.OursiteJWT;
 
-  const verifying = await jose.jwtVerify(
-    jwt,
-    new TextEncoder().encode(`${secret}`)
-  );
-  console.log("verifying", verifying);
+  if (jwt) {
+    const verifying = await jose.jwtVerify(
+      jwt,
+      new TextEncoder().encode(`${secret}`)
+    );
+    console.log("verifying", verifying);
 
-  if (!jwt) {
-    return res.json({ message: "Invalid token!" });
+    return res.json({ data: verifying.payload });
+  } else {
+    return res.json({ data: "Invalid token!" });
   }
-
-  return res.json({ data: verifying.payload });
 }

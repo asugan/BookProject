@@ -2,21 +2,33 @@ import { GetServerSideProps } from "next";
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
 
-const Home = ({ mydata }: any) => {
-  console.log(mydata);
+const Home = (): JSX.Element => {
+  const [user, userData] = useState<any>({});
+
+  const handleGetUser = async () => {
+    const user = await fetch("/api/userinfo");
+    const hamham = await user.json();
+
+    userData(hamham.data);
+  };
+
+  useEffect(() => {
+    handleGetUser();
+  }, [userData]);
+
+  console.log(user);
 
   return (
     <div>
-      <Card data={mydata} />
+      {user === "Invalid token!" ? (
+        <div>
+          <h1>Please Login</h1>
+        </div>
+      ) : (
+        <div>{user.username}</div>
+      )}
     </div>
   );
 };
 
 export default Home;
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await fetch("http://localhost:3000/api/user");
-  const mydata = await response.json();
-
-  return { props: { mydata } };
-};

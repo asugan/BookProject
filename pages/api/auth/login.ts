@@ -14,9 +14,6 @@ export default async function hamham(
 
   const users: any = await getUser(username, password);
 
-  const mail = await users.email;
-  const id = await users.id;
-
   // Check in the database
   // if a user with this username
   // and password exists
@@ -24,9 +21,9 @@ export default async function hamham(
     const token = sign(
       {
         exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30, // 30 days
-        username: username,
-        mail: mail,
-        id: id,
+        username: users.username,
+        mail: users.mail,
+        id: users.id,
         role: users.role,
       },
       secret

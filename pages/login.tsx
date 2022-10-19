@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -34,7 +34,7 @@ export default function Home() {
       });
 
       if (user.status === 200) {
-        router.push("/dashboard/user");
+        router.push("/");
       } else {
         console.log("Some error occured");
       }
