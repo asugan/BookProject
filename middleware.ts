@@ -3,7 +3,7 @@ import * as jose from "jose";
 
 const secret: any = process.env.SECRET;
 
-export default async function middleware(req: any, res: any) {
+export default async function middleware(req: any) {
   const { cookies } = req;
   const { origin } = req.nextUrl;
   const { pathname } = req.nextUrl;

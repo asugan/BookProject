@@ -2,7 +2,6 @@ import {
   createUser,
   deleteUser,
   getAllUsers,
-  getUser,
   updateUser,
 } from "../../prisma/user";
 
@@ -15,17 +14,8 @@ export default async function handle(
   try {
     switch (req.method) {
       case "GET": {
-        if (req.query.id) {
-          // Get a single user if id is provided is the query
-          // api/user?id=1
-          const id: any = req.query.id;
-          const user = await getUser(id);
-          return res.status(200).json(user);
-        } else {
-          // Otherwise, fetch all users
-          const users = await getAllUsers();
-          return res.json(users);
-        }
+        const users = await getAllUsers();
+        return res.json(users);
       }
       case "POST": {
         // Create a new user
