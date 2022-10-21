@@ -1,6 +1,4 @@
-import { GetServerSideProps } from "next";
 import { useState, useEffect } from "react";
-import Card from "../components/Card";
 
 const Home = (): JSX.Element => {
   const [user, userData] = useState<any>({});
