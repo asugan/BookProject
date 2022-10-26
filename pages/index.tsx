@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
 
 const Home = (): JSX.Element => {
   const [user, userData] = useState<any>({});
@@ -23,7 +24,10 @@ const Home = (): JSX.Element => {
           <h1>Please Login</h1>
         </div>
       ) : (
-        <div>{user.username}</div>
+        <div>
+          <Navbar />
+          <div className="content">{user.username}</div>
+        </div>
       )}
     </div>
   );

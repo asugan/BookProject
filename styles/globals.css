@@ -24,3 +24,27 @@ a {
     background: black;
   }
 }
+
+.Navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 8rem;
+}
+
+.Texts ul{
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 2rem;
+}
+
+.menu1{
+  position: absolute;
+}
+
+.menuflex{
+  display: flex;
+  justify-content: end;
+  padding-right: 14rem;
+}
