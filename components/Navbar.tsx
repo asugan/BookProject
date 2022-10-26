@@ -17,24 +17,23 @@ function Navbar() {
         <div className="Texts">
           <ul>
             <li>Anasayfa</li>
-            <li onClick={ondisplay}>Yazılar</li>
+            <li className="dropdown">
+              <a href="#">Yazilar</a>
+              <ul className="uldown">
+                <li>
+                  <a href="#">Fütuhat</a>
+                </li>
+                <li>
+                  <a href="#">Niyazi</a>
+                </li>
+                <li>
+                  <a href="#">Füsus</a>
+                </li>
+              </ul>
+            </li>
             <li>Kitaplar</li>
             <li>Giriş</li>
           </ul>
-        </div>
-      </div>
-      <div className="menuflex">
-        <div
-          className="menu1"
-          style={{
-            display: display ? "block" : "none",
-          }}
-        >
-          <div className="background1">
-            <ul>
-              <li>Bu Bir Menüdür</li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>

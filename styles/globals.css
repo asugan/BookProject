@@ -1,7 +1,5 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -13,6 +11,8 @@ a {
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -32,19 +32,33 @@ a {
   padding: 1rem 8rem;
 }
 
-.Texts ul{
+.Texts > ul{
   display: flex;
   flex-direction: row;
   list-style: none;
   gap: 2rem;
 }
 
-.menu1{
-  position: absolute;
+.dropdown{
+  position: relative;
 }
 
-.menuflex{
-  display: flex;
-  justify-content: end;
-  padding-right: 14rem;
+.dropdown:hover .uldown{
+  display: block;
+}
+
+.uldown{
+  display: none;
+  width: 200px;
+  font-size: 18px;
+  padding-bottom: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 2rem;
+  background-color: red;
+  position: absolute;
+  list-style: none;
+}
+
+.uldown li {
+  margin-top: 0.5rem;
 }
