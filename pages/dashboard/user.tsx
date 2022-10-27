@@ -1,39 +1,27 @@
-import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Editor from "../../components/Editor";
 
 function User() {
-  const [logout, setLogout] = useState(false);
+  const [editorLoaded, setEditorLoaded] = useState(false);
+  const [data, setData] = useState("");
 
-  const router = useRouter();
-
-  const handleLogOut = async () => {
-    const user = await fetch("/api/auth/logout");
-    const hamham = await user.json();
-    setLogout(true);
-
-    if (user.status === 200) {
-      router.push("/login");
-    } else {
-      console.log("errorlar oldu");
-    }
-
-    console.log(hamham);
-  };
-
-  const handleGetUser = async () => {
-    const user = await fetch("/api/userinfo");
-    const hamham = await user.json();
-
-    console.log(hamham.data);
-  };
+  useEffect(() => {
+    setEditorLoaded(true);
+  }, []);
 
   return (
-    <div>
-      Sensitive Data
-      <div className="">
-        <button onClick={() => handleLogOut()}> Logout </button>
-        <button onClick={() => handleGetUser()}> User </button>
-      </div>
+    <div className="App">
+      <h1>ckEditor 5</h1>
+
+      <Editor
+        name="description"
+        onChange={(data) => {
+          setData(data);
+        }}
+        editorLoaded={editorLoaded}
+      />
+
+      {JSON.stringify(data)}
     </div>
   );
 }

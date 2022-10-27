@@ -1,13 +1,7 @@
-import React, { useState } from "react";
+import Link from "next/link";
+import React from "react";
 
 function Navbar() {
-  const [display, Setdisplay] = useState(false);
-
-  const ondisplay = () => {
-    Setdisplay(!display);
-    console.log("its working");
-  };
-
   return (
     <div className="Navcontainer">
       <div className="Navbar">
@@ -32,7 +26,9 @@ function Navbar() {
               </ul>
             </li>
             <li>Kitaplar</li>
-            <li>Giriş</li>
+            <li>
+              <Link href="/login">Login</Link>
+            </li>
           </ul>
         </div>
       </div>
